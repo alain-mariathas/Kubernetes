@@ -1,0 +1,8 @@
+vi namespace.yml
+kubectl apply -f namespace.yml
+vi pod-red.yml
+kubectl apply -f pod-red.yml
+vi pod-blue.yml
+kubectl apply -f pod-blue.yml
+vi service-nodeport-web.yml
+kubectl apply -f service-nodeport-web.yml
