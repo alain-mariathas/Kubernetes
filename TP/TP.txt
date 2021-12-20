@@ -1,0 +1,5 @@
+1) creer un pod webapp-color (image=kodekloud/webapp-color) avec couleur red 
+2) creer un manifest pour replicaset qui devra creer 3 replicas de l'image webapp avec couleur bleue
+
+Chacun des pod crées devra avoir les label (env=prod et app=webapp)
+le sélecetur à utilisé par le replicaset devar etre app=webapp.

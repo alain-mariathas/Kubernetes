@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: ajc-cm
-data:
-  ID: "3"
-  color: "blue"

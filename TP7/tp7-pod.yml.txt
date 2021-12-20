@@ -1,0 +1,19 @@
+# pod.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: webapp
+  name: webapp
+spec:
+  containers:
+  - env:
+    - name: APP_COLOR
+      valueFrom:
+        configMapKeyRef:
+          name: appcolor
+          key:  color
+    image: kodekloud/webapp-color
+    name: webapp2
+    ports:
+    - containerPort: 8080

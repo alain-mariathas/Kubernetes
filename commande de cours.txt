@@ -1,0 +1,75 @@
+kubectl <action> <type_ressource> <Nom_ressource>
+kubectl get pod
+kubectl describe po <pod_name>
+kubectl delete pod <pod_name>
+
+
+Création d'un pod
+kubectl run <pod_name> --image=<image_name> --port <container_port>
+kubectl run nginx-frazer --image nginx --port 80
+
+kubectl logs <Pod_name> #Dans le cas ou le pod n'a qu'un seul container_port
+kubectl logs <pod_name> <Container_name>
+
+
+#Deployment
+kubectl create deploy <nom_deploy> --image <image_name> --port <containerPort> --replicas=3
+
+#Port forward
+kubectl port-forward po/<pod_name> <Host_port>:<containerPort> --address 0.0.0.0
+kubectl port-forward <pod_name> <Host_port>:<containerPort> --address 0.0.0.0
+kubectl port-forward deploy/<deploy_name> <Host_port>:<containerPort> --address 0.0.0.0
+
+
+kubectl get po
+   43  kubectl exec -it nginx-deployment-7c9cfd4dc7-kbwdw -- ls
+   44  kubectl exec -it nginx-deployment-7c9cfd4dc7-kbwdw -- /bin/bash
+   45  kubectl port-forward deploy/nginx-deployment 8080:80 --address 0.0.0.0
+   46  kubectl exec -it nginx-deployment-7c9cfd4dc7-kbwdw -- cat /usr/share/nginx/html/index.html
+   47  kubectl exec -it nginx-deployment-7c9cfd4dc7-rcw8h -- cat /usr/share/nginx/html/index.html
+
+
+vi nginx-pod.yml
+   58  kubectl create -f nginx-pod.yml
+   59  kubectl get po
+   60  kubectl describe po nginx-pod
+
+   ###apply a manifest
+   kubectl apply -f <fichier.yaml>  # permet d'appliquer les modifications ou de creer les ressources définies dasn le manifest
+   kubectl create -f <fichier.yml> 
+   kubectl delete -f <fichier.yml>
+   kubectl replace -f <fichier.yml> #Deployment
+
+
+##Mise à jour d'une image dans un conatiner appartenant à un pod
+kubectl set image <type_ressource(po/deploy)> <Ressource_name> <container_name>=<new_image>
+Exemple
+kubectl set image po nginx-pod nginx=httpd
+
+
+
+#Lancement d'un pod avec variable d'environnement en commandes impératives
+kubectl run <container_name> --image=<image_name> --port <port> --env <var1>=<valeur> --env <var2>=<valeur>
+
+#Lancement d'un pod avec variable d'environnement en commandes impératives
+kubectl run <container_name> --image=<image_name> --port <port> -l app=webapp,env=prod
+
+#Création de manifest à l'aide de commandes impératives
+kubectl run webapp-color --image=kodekloud/webapp-color --env APP_COLOR=red --dry-run=client -o yaml > webapp-pod.yml
+
+#Creer un service afin d'exposer un pod ou un deploy
+kubectl expose deploy/nginx --name nginx-svc --type NodePort --port 80
+
+#Referencer un service
+1) Dans le meme namespace : <service_name>
+2) Dans un namespace différent: <service.name>.<namespace>.svc.cluster.local
+
+#Référencer un pod (adresse Ip Pod: 192.168.0.1)
+1) Dans le meme namespace: <nom_pod>
+2) Dans un namespace différent: 192-169-0-1.<namespace>.pod.cluster.local
+
+kubectl create deploy dp-test --image nginx --replicas=2 --port 80
+   32  kubectl get deploy
+   33  kubectl scale deploy dp-test --replicas=4
+   34  kubectl get deploy
+

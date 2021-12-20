@@ -1,0 +1,22 @@
+vi mysql-volume.yml
+ls /
+kubectl apply -f mysql-volume.yml
+ls /							(data-volume avec le ls)
+ls /data-volume/
+kubectl exec -it mysql-pod -- ls /opt
+
+#Modification du fichier mysql-volume.yml
+
+kubectl delete -f mysql-volume.yml			(si fichier modifier)
+kubectl apply -f mysql-volume.yml
+kubectl get pod
+sudo sh -c 'echo Frazer > /data-opt/frazer.txt'
+ls /data-opt/
+kubectl exec -it mysql-pod -- ls /opt
+kubectl delete -f mysql-volume.yml
+sudo rm -Rf /data-opt/
+sudo rm -Rf /data-volume/
+
+#Modification du fichier mysql-volume.yml
+
+kubectl apply -f mysql-volume.yml
