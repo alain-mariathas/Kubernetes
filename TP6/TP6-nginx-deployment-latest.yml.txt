@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dp-nginx
+  labels:
+    role: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      name: web
+      labels:
+        app: nginx
+        type: pod
+        formateur: Frazer
+    spec:
+      containers:
+        - name: web1
+          image: nginx
+          ports:
+            - containerPort: 80

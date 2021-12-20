@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webappred
+  labels:
+    app: webapp
+    env: prod
+spec:
+  containers:
+  - name: webappred
+    image: kodekloud/webapp-color
+    ports:
+    - containerPort: 8080
+    env:
+    - name: "APP_COLOR"
+      valueFrom:
+        configMapKeyRef:
+          name: ajc-cm
+          key: color
