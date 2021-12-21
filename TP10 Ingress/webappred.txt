@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webappred
+  labels:
+    role: webappred
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webappred
+  template:
+    metadata:
+      name: web
+      labels:
+        app: webappred
+        type: pod
+        formateur: Frazer
+    spec:
+      containers:
+        - name: webappred
+          image: kodekloud/webapp-color
+          ports:
+            - containerPort: 8080
+          env:
+          - name: "APP_COLOR"
+            value: red

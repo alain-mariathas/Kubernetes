@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webappblue
+  labels:
+    role: webappblue
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webappblue
+  template:
+    metadata:
+      name: web
+      labels:
+        app: webappblue
+        type: pod
+        formateur: Frazer
+    spec:
+      containers:
+        - name: webappblue
+          image: kodekloud/webapp-color
+          ports:
+            - containerPort: 8080
+          env:
+          - name: "APP_COLOR"
+            value: blue

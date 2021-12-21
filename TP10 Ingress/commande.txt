@@ -31,3 +31,10 @@ vi nginx-ingress.yml		>> ajout du path vers le pod + ajout annotation
 kuctl apply -f nginx-ingress.yml
 curl www.frazer.com/nginx
 curl www.frazer.com/web
+
+
+
+/////////////////////////// TP 10
+sudo vi /etc/hosts		>> 127.0.0.1 www.alain.com
+kubectl expose deploy webappred --name red-svc --port 8080
+kubectl expose deploy webappblue --name blue-svc --port 8080
