@@ -20,3 +20,28 @@ sudo rm -Rf /data-volume/
 #Modification du fichier mysql-volume.yml
 
 kubectl apply -f mysql-volume.yml
+
+#DELETE
+
+kubectl delete -f mysql-volume.yml
+sudo kubectl delete minikube 
+
+#RESTART
+minikube start --driver=none
+vi pv.yml
+vi pvc.yml
+kubectl apply -f pv.yml
+kubectl apply -f pvc.yml
+kubectl get pv
+kubectl get pvc
+kubectl describe pvc mypvc
+
+#(Available : pv creer attente d'etre lies aevc pvc)
+#(Release : pv liés avec un pvc mais le pvc supprime, contient les données d'une pvc et ne peut pas se lies avec un autre pvc)
+#(Bound : pv liés avec un pvc)
+
+vi mysql-pv.yml
+kubectl apply -f mysql-pv.yml
+
+
+# Pour la suppression commencé par le POD puis le PVC
