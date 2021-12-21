@@ -1,0 +1,33 @@
+#Installation Ingress (Ingress Controller)
+minikube addons enable ingress
+
+#Verfier si etat running de Ingress
+kubectl get ns
+kubectl po -n ingress-nginx
+
+kubectl create deploy nginx --image nginx --port 80 --replicas 2
+kubectl get deploy
+kubectl get pod
+kubectl expose deploy nginx --name nginx-svc --port 80
+(kubectl delete svc nginx-svc)
+kubectl describe svc nginx-svc
+cp wp-ingress.yml nginx-ingress.yml
+vi nginx-ingress.yml
+kuctl apply -f nginx-ingress.yml
+curl www.frazer.com
+ping www.frazer.com
+kubectl get ingress
+sudo vi /etc/hosts		>> 127.0.0.1 www.frazer.com
+ping www.frazer.com
+curl www.frazer.com		>> erreur 404
+curl www.frazer.com/nginx	>> ne fonctionne pas
+vi nginx-ingress.yml
+kuctl apply -f nginx-ingress.yml
+kubectl describe ingress nginx-rule
+curl www.frazer.com
+kubectl run webapp --image kodekloud/webapp-color --port 8080
+kubectl expose po webapp --name web-svc --port 8080
+vi nginx-ingress.yml		>> ajout du path vers le pod + ajout annotation
+kuctl apply -f nginx-ingress.yml
+curl www.frazer.com/nginx
+curl www.frazer.com/web
